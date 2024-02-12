@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# display the name of teh script directory
+echo "Running WKT conversion script from: $(dirname $0)"
+cd $(dirname $0)/.. 2>&1 > /dev/null
+
+node src/wkt2geojson.js "$@"
+
