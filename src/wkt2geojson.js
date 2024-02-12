@@ -1,10 +1,11 @@
-const wellknown = require('wellknown');
+const wellknown = require("wellknown");
 
 // Example WKT for a point
-const wkt = 'POINT (30 10)';
-
+const wkt = process.argv[2];
 // Convert WKT to GeoJSON
 const geojson = wellknown.parse(wkt);
 
-console.log(geojson);
-
+console.log(`{
+  "type": "FeatureCollection",
+  "features": [ { "type": "Feature", "geometry": ${JSON.stringify(geojson)}}]
+}`);
