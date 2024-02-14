@@ -2,8 +2,8 @@
 #
 # default to northern europe
 #
-if [ -z "$SOURCE_SRS" ];then
-  echo "Note: no default spatial reference system (SRS) set for the source data, using EPSG:4258 (ETRS89)"
+if [ -z "$SOURCE_SRS" ]; then
+	echo "Note: no default spatial reference system (SRS) set for the source data, using EPSG:4258 (ETRS89)"
 fi
 SOURCE_SRS=${SOURCE_SRS:-EPSG:4258}
 TARGET_SRS=${TARGET_SRS:-EPSG:32633}
@@ -18,13 +18,13 @@ main() {
 
 	t1=/tmp/geo_$(date +%s)
 	touch $t1
-  if [ "$fmt" == "wkt" ];then
-    echo "Converting WKT to DXF"
-    node src/wkt2geojson.js "$@" >$t1
-  else
-    echo "Converting GeoJSON to DXF"
-    echo "$@" >$t1
-  fi
+	if [ "$fmt" == "wkt" ]; then
+		echo "Converting WKT to DXF"
+		node src/wkt2geojson.js "$@" >$t1
+	else
+		echo "Converting GeoJSON to DXF"
+		echo "$@" >$t1
+	fi
 	t2=~/Downloads/tmp.dxf
 	test -f $t2 && rm $t2
 	touch $t2
@@ -41,12 +41,12 @@ main() {
 # expect a swtch --input-format=geojson or --input-format=wkt. Parse the input format and remove it from the arguments
 
 while [ $# -gt 0 ]; do
-  if [[ $1 == *"--input-format"* ]]; then
-    fmt=$(echo $1 | cut -d'=' -f2)
-    shift
-  else
-    break
-  fi
+	if [[ $1 == *"--input-format"* ]]; then
+		fmt=$(echo $1 | cut -d'=' -f2)
+		shift
+	else
+		break
+	fi
 done
 
 main "$@"
